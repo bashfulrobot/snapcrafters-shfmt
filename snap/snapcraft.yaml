@@ -11,7 +11,6 @@ confinement: strict # use 'strict' once you have the right plugs and slots
 grade: stable
 architectures:
   - build-on: amd64
-  - build-on: arm64
 parts:
   shfmt:
     # Use the nil plugin with wget until bz2 is supported by snapcraft.
