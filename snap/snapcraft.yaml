@@ -1,39 +1,39 @@
 name: shfmt # you probably want to 'snapcraft register <name>'
 base: core18
-version: "3.1.1" # just for humans, typically '1.2+git' or '1.3.2'
+version: "3.1.2" # just for humans, typically '1.2+git' or '1.3.2'
 # https://github.com/snapcore/snapd/blob/master/spdx/licenses.go
 license: "BSD-3-Clause"
 summary: A shell parser, formatter and interpreter (POSIX/Bash/mksh). # 79 char long summary
 description: |
-  "A shell parser, formatter and interpreter (POSIX/Bash/mksh)."
+    "A shell parser, formatter and interpreter (POSIX/Bash/mksh)."
 
 confinement: strict # use 'strict' once you have the right plugs and slots
 grade: stable
 architectures:
-  - build-on: amd64
+    - build-on: amd64
 
 plugs:
-  dot-editorconfig:
-    interface: personal-files
-    read:
-      - $HOME/.editorconfig
+    dot-editorconfig:
+        interface: personal-files
+        read:
+            - $HOME/.editorconfig
 
 parts:
-  shfmt:
-    # Use the nil plugin with wget until bz2 is supported by snapcraft.
-    plugin: nil
-    build-packages:
-      - wget
-    override-pull: |
-      wget https://github.com/mvdan/sh/releases/download/v$SNAPCRAFT_PROJECT_VERSION/$SNAPCRAFT_PROJECT_NAME_v$SNAPCRAFT_PROJECT_VERSION_linux_$SNAP_ARCH
-    override-build: |
-      snapcraftctl build
-      install $SNAPCRAFT_PROJECT_NAME_v$SNAPCRAFT_PROJECT_VERSION_linux_$SNAP_ARCH $SNAPCRAFT_PART_INSTALL/shfmt
+    shfmt:
+        # Use the nil plugin with wget until bz2 is supported by snapcraft.
+        plugin: nil
+        build-packages:
+            - wget
+        override-pull: |
+            wget https://github.com/mvdan/sh/releases/download/v$SNAPCRAFT_PROJECT_VERSION/$SNAPCRAFT_PROJECT_NAME_v$SNAPCRAFT_PROJECT_VERSION_linux_$SNAP_ARCH
+        override-build: |
+            snapcraftctl build
+            install $SNAPCRAFT_PROJECT_NAME_v$SNAPCRAFT_PROJECT_VERSION_linux_$SNAP_ARCH $SNAPCRAFT_PART_INSTALL/shfmt
 
 apps:
-  shfmt:
-    command: shfmt
-    plugs:
-      - home
-      - network
-      - dot-editorconfig
+    shfmt:
+        command: shfmt
+        plugs:
+            - home
+            - network
+            - dot-editorconfig
